@@ -1,0 +1,35 @@
+<app-breadcrumb [title]="'Toosie Blog'" [breadcrumb]="'Blog'"></app-breadcrumb>
+<!-- section start -->
+<section class="section-b-space  blog-page">
+    <div class="container">
+        <div class="row">
+            <!--Blog List start-->
+            <div class="col-xl-12 col-lg-8 col-md-7 ">
+                <div *ngFor="let blog of blogs" class="row blog-media">
+                    <div class="col-xl-6">
+                        <div style="width: 540px; height: 319px; overflow: hidden" class="blog-left">
+                            <a [routerLink]="'../blog/details/' + blog._id">
+                                <img style="width: 540px; height: 319px; object-fit: cover;" [src]="blog.blogImage" class="img-fluid" alt=""/></a>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="blog-right">
+                            <div>
+                                <h6 *ngIf="blog?.createdAt">{{blog.createdAt | date}}</h6>
+                                <a [routerLink]="'../blog/details/' + blog._id"><h4>{{blog.blogTitle}}</h4></a>
+                                <ul class="post-social">
+                                    <li  *ngIf="blog?.blogAuthor?.email">Posted By : {{blog?.blogAuthor?.fullName}} </li>
+                                    <li  *ngIf="!blog?.blogAuthor?.email">Posted By : Anonymous </li>
+                                   
+                                </ul>
+                                <p [innerHTML]="blog.blogContent | slice: 0:200"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Blog List start-->
+        </div>
+    </div>
+</section>
+<!-- Section ends -->

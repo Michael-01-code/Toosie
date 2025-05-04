@@ -1,0 +1,72 @@
+<!-- Container-fluid starts-->
+<div class="container-fluid bulk-cate">
+    <div class="card ">
+        <div class="card-header">
+            <h5>Upload Main Page Banner</h5>
+        </div>
+        <div class="card-body">
+            <div class="card-body dropzone-custom p-0">
+                <ngx-dropzone (change)="onSelect($event)">
+                    <div class="dropzone dropzone-primary" style="border: none;">
+                        <div class="dz-message needsclick">
+                            <i class="fa fa-cloud-upload"></i>
+                            <h4 class="mb-0 f-w-600">Drop Prescription here or click to upload.</h4>
+                            <h6 class="mb-0 f-w-600">Upload 4 items only</h6>
+                        </div>
+                    </div>
+                    <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                    </ngx-dropzone-preview>
+                </ngx-dropzone>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="files.length > 0" class="card">
+        <div class="card-header">
+            <h5>Banner Text</h5>
+        </div>
+        <form [formGroup]="productForm" class="px-3 py-3" (ngSubmit)="onSubmit()">
+            <div class="pl-2">  
+                <label for="name">Set as current:</label>  
+                <input type="checkbox" id="name" name="current" formControlName="current" >  
+              </div>  
+            <table class="table" formArrayName="banners">
+                <!-- <tr>  
+                <th colspan="2">Add Multiple Quantity:</th>  
+                <th width="150px"><button type="button" (click)="addQuantity()" class="btn btn-primary">Add More</button></th>  
+              </tr>   -->
+                <tr *ngFor="let quantity of banners().controls; let i=index" [formGroupName]="i">
+                    <td>
+                        Header Text {{i + 1}}:
+                        <input class="form-control" type="text" formControlName="header" class="form-control">
+                    </td>
+                    <td>
+                        Sub Text:
+                        <input class="form-control" type="text" formControlName="subText" class="form-control">
+                    </td>
+                    <td>
+                        <button style="margin-top: 27px;" (click)="removeBanner(i)" class="btn btn-danger">Remove</button>
+                    </td>
+                </tr>
+            </table>
+
+            <button type="submit" class="btn btn-success">Submit</button>
+
+        </form>
+
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h5>Media File List</h5>
+        </div>
+        <div class="card-body">
+            <div id="batchDelete" class="category-table custom-datatable media-datatable">
+                <div class="table-responsive">
+                    <ng2-smart-table [settings]="settings" [source]="media"></ng2-smart-table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

@@ -1,0 +1,29 @@
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <h5>User Details</h5>
+        </div>
+        <div class="card-body tab2-card">
+            <ngb-tabset class="tab-coupon">
+                <ngb-tab title="Users">
+                    <ng-template ngbTabContent>
+                        <div class="table-responsive">
+                            <ng2-smart-table (deleteConfirm)="onDeleteConfirm($event)" [settings]="settings"
+                                [source]="user_list"></ng2-smart-table>
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab title="Referrals">
+                    <ng-template ngbTabContent>
+                        <div class="table-responsive">
+                            <ng2-smart-table [settings]="referralSettings" [source]="referrals"></ng2-smart-table>
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+            </ngb-tabset>
+
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

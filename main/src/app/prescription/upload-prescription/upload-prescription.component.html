@@ -1,0 +1,45 @@
+<div class="container-fluid mt-3">
+    <form (ngSubmit)="savePrescription()" [formGroup]="prescriptionForm" class="row justify-content-center product-adding">
+        <div class="col-xl-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5>General</h5>
+                </div>
+                <div  class="card-body">
+                    <div class="digital-add needs-validation">
+                        <label class="col-form-label pt-0"> Upload Prescription</label>
+                        <div class="card-body dropzone-custom p-0">
+                            <ngx-dropzone (change)="onSelect($event)">
+                                <div class="dropzone dropzone-primary" style="border: none;">
+                                <div class="dz-message needsclick">
+                                    <i class="fa fa-cloud-upload"></i>
+                                    <h4 class="mb-0 f-w-600">Drop Prescription here or click to upload.</h4>
+                                </div>
+                            </div>
+                                <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                </ngx-dropzone-preview>
+                            </ngx-dropzone>
+                        </div>
+
+                      
+                        <div class="form-group">
+                            <label class="col-form-label">Description</label>
+                            <textarea formControlName="description" rows="5" cols="12"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                         <button [disabled]="!prescriptionForm.valid" class="btn primary-btn">
+                            Save
+                            <div *ngIf="loading" class="spinner-grow" role="status">
+                                <span class="sr-only">Loading...</span>
+                              </div>
+                        </button>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

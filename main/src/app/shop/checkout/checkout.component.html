@@ -1,0 +1,218 @@
+<app-breadcrumb [title]="'Checkout'" [breadcrumb]="'Checkout'"></app-breadcrumb>
+<section class="section-b-space">
+    <div class="container padding-cls">
+        <div class="checkout-page">
+            <div class="checkout-form">
+                <form>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12 col-xs-12">
+                            <div class="checkout-title">
+                                <h3>Billing Details</h3>
+                            </div>
+                            <div class="row check-out">
+                                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                    <div class="field-label">Full Name</div>
+                                    <input type="text" name="fullName" [formControl]="checkoutForm.controls['fullName']"
+                                        value="" placeholder="" autocomplete="off">
+                                    <div *ngIf="checkoutForm.controls.fullName.touched && checkoutForm.controls.fullName.errors?.required"
+                                        class="text text-danger">
+                                        First Name is required.
+                                    </div>
+                                    <div *ngIf="checkoutForm.controls.fullName.touched && checkoutForm.controls.fullName.errors?.pattern"
+                                        class="text text-danger">
+                                        First Name must be alphabets only.
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <div class="field-label">Phone</div>
+                                    <input type="text" name="phone" [formControl]="checkoutForm.controls['phone']"
+                                        value="" placeholder="" autocomplete="off">
+                                    <div *ngIf="checkoutForm.controls.phone.touched && checkoutForm.controls.phone.errors?.required"
+                                        class="text text-danger">
+                                        Phone No is required.
+                                    </div>
+                                    <div *ngIf="checkoutForm.controls.phone.touched && checkoutForm.controls.phone.errors?.pattern"
+                                        class="text text-danger">
+                                        Phone No must be numbers only.
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <div class="field-label">Email Address</div>
+                                    <input type="text" name="email" [formControl]="checkoutForm.controls['email']"
+                                        value="" placeholder="" autocomplete="off">
+                                    <div *ngIf="checkoutForm.controls.email.touched && checkoutForm.controls.email.errors?.required"
+                                        class="text text-danger">
+                                        Email is required
+                                    </div>
+                                    <div *ngIf="checkoutForm.controls.email.touched && checkoutForm.controls.email.errors?.email"
+                                        class="text text-danger">
+                                        Invalid Email
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12 col-sm-6 col-xs-12">
+                                    <div class="field-label">State</div>
+                                    <select name="state" [formControl]="checkoutForm.controls['state']">
+                                        <option value="" selected>Select State</option>
+                                        <option value="Abuja">Abuja</option>
+                                        <!--<option value="Lagos">Lagos</option>-->
+                                        <!--<option value="Kano">Kano</option>-->
+                                    </select>
+                                    <div *ngIf="checkoutForm.controls.state.touched && checkoutForm.controls.state.errors?.required"
+                                        class="text text-danger">
+                                        State is required
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                    <div class="field-label">Town/City</div>
+                                    <select name="city" [formControl]="checkoutForm.controls['city']">
+                                        <option value="" selected>Select Location</option>
+                                        <option *ngFor="let i of allLocations" [value]="i.label">{{i.label}}</option>
+                                    </select>
+                                    <div *ngIf="checkoutForm.controls.city.touched && checkoutForm.controls.city.errors?.required"
+                                        class="text text-danger">
+                                        City is required
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                    <div class="field-label">Address</div>
+                                    <input type="text" name="address" [formControl]="checkoutForm.controls['address']"
+                                        value="" placeholder="" autocomplete="off">
+                                    <div *ngIf="checkoutForm.controls.address.touched && checkoutForm.controls.address.errors?.required"
+                                        class="text text-danger">
+                                        Address is required
+                                    </div>
+                                    <div *ngIf="checkoutForm.controls.address.touched && checkoutForm.controls.address.errors?.maxlength"
+                                        class="text text-danger">
+                                        Maximum 50 characters
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-6 col-sm-12 col-xs-12">
+                            <div class="checkout-details">
+                                <div class="order-box">
+                                    <div class="title-box">
+                                        <div>Product <span> Total</span></div>
+                                    </div>
+                                    <ul class="qty" *ngIf="products.length">
+                                        <li *ngFor="let product of products">
+                                            {{ product.title }} × {{ product.quantity }}
+                                            <span>
+                                                {{ (product.price | discount:product) * productService?.Currency.price | currency:productService?.Currency.currency:'symbol' }}
+                                            </span>
+                                        </li>
+                                    </ul>
+                                    <ul class="qty" *ngIf="!products.length">
+                                        <li class="empty-checkout"> There are no products in cart </li>
+                                    </ul>
+
+                                    <ul class="sub-total pl-3">
+                                        <li>
+                                            Subtotal <span
+                                                class="count">{{ getTotal | async | currency:productService?.Currency.currency:'symbol'}}</span>
+                                        </li>
+                                        <li *ngIf="products.length">
+                                            Shipping
+                                            <div class="shipping" >
+                                                <div class="shopping-option">
+                                                    <input type="radio" value="delivery"
+                                                        [formControl]="checkoutForm.controls['deliveryType']"
+                                                        checked="checked" id="free-shipping">
+                                                    <label for="free-shipping">Delivery</label>
+                                                </div>
+                                                <div class="shopping-option">
+                                                    <input type="radio" value="pickup"
+                                                        [formControl]="checkoutForm.controls['deliveryType']"
+                                                        id="local-pickup">
+                                                    <label for="local-pickup">Local Pickup</label>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li *ngIf="checkoutForm.controls['deliveryType'].value === 'delivery' && checkoutForm.controls.address.valid && checkoutForm.controls.city.valid && checkoutForm.controls.state.valid && products.length" >
+                                            <input (change)="addPriority()" type="checkbox" name="priorityDelivery"
+                                                [(ngModel)]="priorityDelivery" />
+                                            <label for="prioritydelivery" class="pl-2">Priority Delivery</label>
+                                        </li>
+                                        <ul class="additional-costs pl-3">
+                                            <li *ngIf="checkoutForm.controls['deliveryType'].value === 'delivery' && checkoutForm.controls.address.valid && checkoutForm.controls.city.valid && checkoutForm.controls.state.valid && products.length">
+                                                Delivery Cost: <span class="count">₦{{getDeliveryCost()}}</span>
+                                            </li>
+                                            <li *ngIf="checkoutForm.controls['deliveryType'].value === 'pickup'">
+                                                Delivery Cost: <span class="count">₦0</span> <!-- Pickup doesn't incur delivery cost -->
+                                            </li>
+                                            <li *ngIf="priorityDelivery">
+                                                Priority Delivery: <span class="count">₦1000</span> <!-- Only show if priority delivery is selected -->
+                                            </li>
+                                        </ul>
+                                    </ul>
+                                    
+                                    <ul class="total" *ngIf="checkoutForm.controls.address.valid && checkoutForm.controls.city.valid && checkoutForm.controls.state.valid && products.length">
+                                        <li>Total <span
+                                                class="count">{{ amount | currency:productService?.Currency.currency:'symbol'}}</span>
+                                        </li>
+                                       <!--  <li>Disclaimer <span
+                                            class="count">**The difference in price corresponds to delivery charge** </span> 
+                                            
+                                    </li> -->
+                                    </ul>
+                                </div>
+
+                                <!-- Payment Box (Only displays when address, city, and state are valid) -->
+                                <div class="payment-box" *ngIf="checkoutForm.controls.address.valid && checkoutForm.controls.city.valid && checkoutForm.controls.state.valid && products.length">
+                                    <div class="upper-box">
+                                        <div class="payment-options">
+                                            <ul>
+                                                <!-- <li>
+                                                    <div class="radio-option">
+                                                        <input type="radio" [formControl]="checkoutForm.controls['paymentMethod']" [value]="'pod'"
+                                                            name="payment-group" id="payment-2">
+                                                        <label for="payment-2">Payment on Delivery
+                                                            <span class="small-text">Please send a check to Store Name,
+                                                                Store Street, Store Town, Store State / County, Store
+                                                                Postcode.</span></label>
+                                                    </div>
+                                                </li> -->
+                                                <li>
+                                                    <div class="radio-option paypal">
+                                                        <input type="radio" [formControl]="checkoutForm.controls['paymentMethod']" [value]="'card'"
+                                                            name="payment-group" id="payment-3">
+                                                        <label for="payment-3">Pay Online<span class="image"><img
+                                                                    *ngIf="payment =='card' " style="width: 30%"
+                                                                    src="assets/images/debit-card.png"
+                                                                    alt="" /></span></label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <!-- <button type="submit" *ngIf="paymentMethod.value === 'pod'" class="btn-solid btn"
+                                        button (click)="!checkoutForm.valid" (click)="makePayment('pod' + reference)">
+                                            Place Order
+                                        </button> -->
+                                        <button type="submit" *ngIf="paymentMethod.value === 'card'" class="btn-solid btn"
+                                        (click)="!checkoutForm.valid" (click)="payWithPaystack()">
+                                            Place Order
+                                        </button>
+    
+                                        <!-- <angular4-paystack *ngIf="paymentType.value === 'card'" [email]="user?.email"
+                                            [amount]="amount * 100" [ref]="reference" [channels]="['card', 'bank']"
+                                            [style]="paystackBtn" (onClose)="paymentCancel()"
+                                            (callback)="paymentDone($event)">
+                                            Place Order ₦{{amount}}
+                                        </angular4-paystack> -->
+                                        <!-- <ngx-paypal [config]="payPalConfig" *ngIf="payment == 'Paypal'"></ngx-paypal> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,121 @@
+<app-breadcrumb [title]="'Dashboard'" [breadcrumb]="'Dashboard'"></app-breadcrumb>
+
+<!-- section start -->
+<section class="section-b-space">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="account-sidebar" (click)="ToggleDashboard()">
+                    <a href="javascript:void(0)" class="popup-btn">
+                        my account
+                    </a>
+                </div>
+                <div class="dashboard-left" [class.open]="openDashboard">
+                    <div class="collection-mobile-back" (click)="ToggleDashboard()">
+                        <span class="filter-back">
+                            <i class="fa fa-angle-left" aria-hidden="true"></i> back
+                        </span>
+                    </div>
+                    <div class="block-content">
+                        <ul>
+                            <li class="active"><a href="javascript:void(0)">Account Info</a></li>
+                            <li><a href="javascript:void(0)">Address Book</a></li>
+
+                            <!-- Show 'My Orders' only for Sellers -->
+                            <li *ngIf="isSeller()"><a href="javascript:void(0)">My Orders</a></li>
+
+                            <li><a href="javascript:void(0)">My Wishlist</a></li>
+                            <li><a href="javascript:void(0)">Newsletter</a></li>
+                            <li><a href="javascript:void(0)">My Account</a></li>
+                            <li><a href="javascript:void(0)">Change Password</a></li>
+                            <li class="last"><a href="javascript:void(0)">Log Out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="dashboard-right">
+                    <div class="dashboard">
+                        <div class="page-title">
+                            <h2>My Dashboard</h2>
+                        </div>
+                        <div class="welcome-msg">
+                            <p>Hello, {{ user?.fullName }}!</p>
+                            <p>From your My Account Dashboard you have the ability to view a snapshot of your recent account activity and update your account information. Select a link below to view or edit information.</p>
+                        </div>
+
+                        <!-- Account Information Section -->
+                        <div class="box-account box-info">
+                            <div class="box-head">
+                                <h2>Account Information</h2>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="box">
+                                        <div class="box-title">
+                                            <h3>Contact Information</h3>
+                                            <a href="javascript:void(0)">Edit</a>
+                                        </div>
+                                        <div class="box-content">
+                                            <h6>{{ user?.fullName }}</h6>
+                                            <h6>{{ user?.email }}</h6>
+                                            <h6><a href="javascript:void(0)">Change Password</a></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="box">
+                                        <div class="box-title">
+                                            <h3>Newsletters</h3>
+                                            <a href="javascript:void(0)">Edit</a>
+                                        </div>
+                                        <div class="box-content">
+                                            <p>
+                                                You are currently not subscribed to any newsletter.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Address Book -->
+                            <div>
+                                <div class="box">
+                                    <div class="box-title">
+                                        <h3>Address Book</h3>
+                                        <a href="javascript:void(0)">Manage Addresses</a>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <h6>Default Billing Address</h6>
+                                            <address>
+                                                You have not set a default billing address.<br>
+                                                <a href="javascript:void(0)">Edit Address</a>
+                                            </address>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <h6>Default Shipping Address</h6>
+                                            <address>
+                                                You have not set a default shipping address.<br>
+                                                <a href="javascript:void(0)">Edit Address</a>
+                                            </address>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section for Seller-Specific Content -->
+                    <div *ngIf="isSeller()">
+                        <div class="seller-section">
+                            <h3>Your Orders</h3>
+                            <!-- Add content for seller orders here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- section end -->

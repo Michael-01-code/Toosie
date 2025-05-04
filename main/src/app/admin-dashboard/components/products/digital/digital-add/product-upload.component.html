@@ -1,0 +1,82 @@
+<div class="container-fluid">
+    <form (ngSubmit)="saveProduct()" [formGroup]="productForm" class="row product-adding">
+      <div class="col-xl-6">
+        <div class="card">
+          <div class="card-header">
+            <h5>General</h5>
+          </div>
+          <div class="card-body">
+            <div class="digital-add needs-validation">
+              <!-- Product fields here -->
+              <div class="form-group">
+                <label for="productPrice" class="col-form-label"><span>*</span> Product Price</label>
+                <input class="form-control" id="productPrice" type="text" formControlName="actualPrice">
+                <div *ngIf="(actualPrice?.dirty || actualPrice?.touched) && actualPrice?.errors" class="errors">
+                  <span *ngIf="actualPrice?.errors?.required">Actual Price is required</span>
+                </div>
+              </div>
+  
+              <div class="form-group">
+                <label for="productQuantity" class="col-form-label"><span>*</span> Total Quantity</label>
+                <input class="form-control" id="productQuantity" type="text" formControlName="stock">
+                <div *ngIf="(stock?.dirty || stock?.touched) && stock?.errors" class="errors">
+                  <span *ngIf="stock?.errors?.required">Quantity is required</span>
+                </div>
+              </div>
+  
+              <!-- Excel Upload Option -->
+              <div class="form-group">
+                <label for="uploadExcel" class="col-form-label">Upload Excel File</label>
+                <input type="file" id="uploadExcel" (change)="onFileChange($event)" accept=".xlsx, .xls" />
+              </div>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-xl-6">
+        <div class="card">
+          <div class="card-header">
+            <h5>Add Description and Images</h5>
+          </div>
+          <div class="card-body">
+            <div class="digital-add needs-validation">
+              <div class="form-group mb-0">
+                <label class="col-form-label "> Description</label>
+                <textarea class="form-control" formControlName="description" language="en"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h5>Meta Data</h5>
+          </div>
+          <div class="card-body">
+            <div class="digital-add needs-validation">
+              <div class="form-group">
+                <label for="validationCustom05" class="col-form-label pt-0"> Add Product Tags</label>
+                <input class="form-control" id="validationCustom05" type="text" formControlName="tags">
+              </div>
+              <div class="form-group mb-0">
+                <div class="product-buttons text-center">
+                  <button [disabled]="!productForm.valid" class="btn primary-btn">
+                    Save Product
+                    <div *ngIf="loading" class="spinner-grow" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  </button>
+                  <button type="button" class="btn btn-light">Discard</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="form-group">
+    <label for="uploadExcel" class="col-form-label">Upload Excel File</label>
+    <input type="file" id="uploadExcel" (change)="onFileChange($event)" accept=".xlsx, .xls" />
+  </div>  

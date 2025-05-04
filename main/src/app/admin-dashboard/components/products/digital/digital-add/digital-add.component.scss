@@ -1,0 +1,16 @@
+.trash {
+  position: absolute;
+  right: 20px;
+  top: 5px;
+  padding: 5px;
+  background: #ff5370;
+  border: 50%;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  i {
+    color: #fff;
+  }
+}

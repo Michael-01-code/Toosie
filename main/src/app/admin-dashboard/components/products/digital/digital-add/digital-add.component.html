@@ -1,0 +1,196 @@
+<div class="container-fluid">
+    <form (ngSubmit)="saveProduct()" [formGroup]="productForm" class="row product-adding">
+        <div class="col-xl-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>General</h5>
+                </div>
+                <div  class="card-body">
+                    <div class="digital-add needs-validation">
+                        <div class="form-group">
+                            <label for="validationCustom01" class="col-form-label pt-0"><span>*</span> Title</label>
+                            <input class="form-control" id="validationCustom01" type="text" formControlName="title">
+                            <div *ngIf="(title?.dirty || title?.touched) && title?.errors" class="errors">
+                                <span *ngIf="title?.errors?.required">Title is required</span>
+                                <span *ngIf="title?.errors?.category">Title is invalid</span>
+                              </div>
+                        </div>
+
+                        <!-- <div class="form-group">
+                            <label for="validationCustomtitle" class="col-form-label pt-0"><span>*</span> SKU</label>
+                            <input class="form-control" id="validationCustomtitle" type="text" required="">
+                        </div> -->
+                        <div class="form-group">
+                            <label class="col-form-label"><span>*</span> Categories</label>
+                            <select formControlName="category"  class="custom-select" required="">
+                                <option value="">--Select--</option>
+                                <option *ngFor="let i of categories" [value]="i._id">{{i.category}}</option>
+
+                            </select>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label class="col-form-label">Sort Summary</label>
+                            <textarea rows="5" cols="12"></textarea>
+                        </div> -->
+                        <div class="form-group">
+                            <label for="validationCustom02" class="col-form-label"><span>*</span> Product Price</label>
+                            <input class="form-control" id="validationCustom02" type="text" formControlName="actualPrice">
+                            <div *ngIf="(actualPrice?.dirty || actualPrice?.touched) && actualPrice?.errors" class="errors">
+                                <span *ngIf="actualPrice?.errors?.required">Actual Price is required</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="validationCustom02" class="col-form-label"><span>*</span> Total Quantity</label>
+                            <input class="form-control" id="validationCustom02" type="text" formControlName="stock">
+                            <div *ngIf="(stock?.dirty || stock?.touched) && stock?.errors" class="errors">
+                                <span *ngIf="stock?.errors?.required">Quanity is required</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Discount (%)</label>
+                            <input type="text" class="form-control" placeholder="discountPercent" formControlName="discountPercent">
+                            <div *ngIf="(discountPercent?.dirty || discountPercent?.touched) && discountPercent?.errors" class="errors">
+                                <span *ngIf="discountPercent?.errors?.required">discountPercent is required</span>
+                                <span *ngIf="discountPercent?.errors?.discountPercent">discountPercent is invalid</span>
+                              </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label"><span>*</span> Status</label>
+                            <div class="m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">
+                                <label class="d-block" for="enabled">
+                                    <input formControlName="enabled" [value]="true" class="radio_animated" type="radio">
+                                    Enable
+                                </label>
+                                <label class="d-block" for="enabled">
+                                    <input formControlName="enabled" [value]="false" class="radio_animated" type="radio">
+                                    Disable
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label"><span>*</span>Show in Special</label>
+                            <div class="m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">
+                                <label class="d-block" for="enabled">
+                                    <input formControlName="isSpecial" [value]="true" class="radio_animated" type="radio">
+                                    Yes
+                                </label>
+                                <label class="d-block" for="enabled">
+                                    <input formControlName="isSpecial" [value]="false" class="radio_animated" type="radio">
+                                    No
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label"><span>*</span>Show in Trending</label>
+                            <div class="m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">
+                                <label class="d-block" for="enabled">
+                                    <input formControlName="isTrending" [value]="true" class="radio_animated" type="radio">
+                                    Yes
+                                </label>
+                                <label class="d-block" for="enabled">
+                                    <input formControlName="isTrending" [value]="false" class="radio_animated" type="radio">
+                                    No
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div *ngFor="let i of savedImages" class="col-3">
+                                <img [src]="i" class="img-thumbnail" alt="...">
+                                <a class="trash" href="javascript:void(0)" (click)="removeItem(i)">
+                                    <i class="ti-trash" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Add Description and Images</h5>
+                </div>
+                <div class="card-body">
+                    <div class="digital-add needs-validation">
+
+                        <div class="form-group mb-0">
+                            <label class="col-form-label "> Description</label>
+                            <div class="description-sm">
+                                <textarea class="form-control" formControlName="description" language="en"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="digital-add needs-validation">
+
+                        <div class="form-group mb-0">
+                            <label class="col-form-label "> Ingredients</label>
+                            <div class="description-sm">
+                                <textarea class="form-control" formControlName="ingredients" language="en"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="digital-add needs-validation">
+
+                        <div class="form-group mb-0">
+                            <label class="col-form-label "> Warning</label>
+                            <div class="description-sm">
+                                <textarea class="form-control" formControlName="warning" language="en"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <label class="col-form-label "> Product Upload</label>
+                    <div class="card-body dropzone-custom p-0">
+                        <ngx-dropzone (change)="onSelect($event)">
+                            <div class="dropzone dropzone-primary" style="border: none;">
+                            <div class="dz-message needsclick">
+                                <i class="fa fa-cloud-upload"></i>
+                                <h4 class="mb-0 f-w-600">Drop Image here or click to upload.</h4>
+                            </div>
+                        </div>
+                            <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                                <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                            </ngx-dropzone-preview>
+                        </ngx-dropzone>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h5>Meta Data</h5>
+                </div>
+                <div class="card-body">
+                    <div class="digital-add needs-validation">
+                        <div class="form-group">
+                            <label for="validationCustom05" class="col-form-label pt-0"> Add Product Tags</label>
+                            <input class="form-control" id="validationCustom05" type="text" formControlName="tags">
+                            <div *ngIf="(tags?.dirty || tags?.touched) && tags?.errors" class="errors">
+                                <span *ngIf="tags?.errors?.required">tags is required</span>
+                                <span *ngIf="tags?.errors?.tags">tags is invalid</span>
+                              </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label">Brand</label>
+                            <input class="form-control" type="text" placeholder="brand" formControlName="brand">
+                            <div *ngIf="(brand?.dirty || brand?.touched) && brand?.errors" class="errors">
+                                <span *ngIf="brand?.errors?.required">brand is required</span>
+                                <span *ngIf="brand?.errors?.brand">brand is invalid</span>
+                              </div>
+                        </div>
+                        <div class="form-group mb-0">
+                            <div class="product-buttons text-center">
+                                <button [disabled]="!productForm.valid" class="btn primary-btn">
+                                    Save Product
+                                    <div *ngIf="loading" class="spinner-grow" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                      </div>
+                                </button>
+                                <button type="button" class="btn btn-light">Discard</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

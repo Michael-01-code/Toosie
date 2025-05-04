@@ -1,0 +1,17 @@
+<div class="pro_inventory" *ngIf="stock > 0">
+  <p class="active" *ngIf="stock <= 5">
+    Hurry! We have only {{ stock }} product{{ stock > 1 ? 's' : '' }} in stock.
+  </p>
+  <div class="inventory-scroll nostripes active">
+    <span [style.background-color]="stock <= 5 ? 'orange' : ''" style="width: 95%;"></span>
+  </div>
+</div>
+
+<div class="pro_inventory" *ngIf="stock === 0">
+  <p class="out-of-stock">
+    Sorry! We ran out, restock shortly.
+  </p>
+  <div class="inventory-scroll nostripes active">
+    <span style="background-color: red; width: 95%;"></span>
+  </div>
+</div>

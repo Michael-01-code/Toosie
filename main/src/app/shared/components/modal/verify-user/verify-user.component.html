@@ -1,0 +1,37 @@
+<!--modal popup start-->
+<ng-template class="theme-modal" #verifyUser let-modal>
+    <div class="modal-content">
+        <div class="modal-body modal7">
+            <div class="container-fluid p-0">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="modal-bg">
+                            <button type="button" class="close"  aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <div class="offer-content">
+                                <div style="height: 100px; overflow: hidden">
+
+                                    <img src="assets/images/login-bg.png" class="img-fluid" alt="">
+                                </div>
+                                <h2>Verify Code</h2>
+                                <form  class="auth-form needs-validation" (ngSubmit)="submit()" [formGroup]="credentials" >
+                                    <div class="form-group mx-sm-3">
+                                        <input  type="text" class="form-control" formControlName="otp" id="mce-EMAIL" style="font-size: 30px;" placeholder="Enter code" required="required">
+                                       
+                                        <button [disabled]="!credentials.valid" class="btn btn-solid">Verify Account
+                                            <div *ngIf="loading" class="spinner-grow" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                              </div>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<!--modal popup end-->

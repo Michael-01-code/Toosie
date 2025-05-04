@@ -1,0 +1,58 @@
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card tab2-card">
+                <div class="card-header">
+                    <h5> Add User</h5>
+                </div>
+                <div class="card-body tab2-card">
+                    <ngb-tabset class="tab-coupon">
+                        <ngb-tab title="Account">
+                            <ng-template ngbTabContent>                                                                                                                                        <div class="tab-pane fade active show" id="account" role="tabpanel"
+                                        aria-labelledby="account-tab">
+                                    <form (ngSubmit)="submitForm()" [formGroup]="accountForm" class="needs-validation user-add" novalida>
+                                        <h4>Account Details</h4>
+                                        <div class="form-group row">
+                                            <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span>
+                                                Name</label>
+                                            <input formControlName="fullName" class="form-control col-xl-8 col-md-7" id="validationCustom0"
+                                                type="text" required="true">
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="validationCustom2" class="col-xl-3 col-md-4"><span>*</span>
+                                                Email</label>
+                                            <input formControlName="email" class="form-control col-xl-8 col-md-7" id="validationCustom2"
+                                                type="text" required="true">
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="validationCustom3" class="col-xl-3 col-md-4"><span>*</span>
+                                                Phone</label>
+                                            <input formControlName="phone" class="form-control col-xl-8 col-md-7" id="validationCustom3"
+                                                type="text" required="true">
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="validationCustom4" class="col-xl-3 col-md-4"><span>*</span>
+                                                Role</label>
+                                                <select formControlName="userType" class="form-control col-xl-8 col-md-7">
+                                                    <option value="admin">Admin</option>
+                                                    <option value="seller">Seller</option>
+                                                    <option value="user">User</option>
+                                                </select>
+                                                <div class="pull-right">
+                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </ng-template>
+                        </ngb-tab>
+
+                    </ngb-tabset>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

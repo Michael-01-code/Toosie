@@ -1,0 +1,59 @@
+<i class="fas fa-pencil-alt fa-fw"></i>
+<button type="button" class="btn btn-light" data-toggle="modal" data-original-title="test" data-target="#exampleModal"
+    (click)="open(content)"><i class="fa fa-pencil fa-fw"></i></button>
+<ng-template #content let-modal>
+    <form (ngSubmit)="updateCategory()" [formGroup]="categoryForm" class="needs-validation">
+        <div class="modal-header">
+            <h5 class="modal-title f-w-600" id="exampleModalLabel">Add Category</h5>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form">
+                <div class="form-group">
+                    <label for="validationCustom01" class="mb-1">Category Name :</label>
+                    <input class="form-control" formControlName="category" id="validationCustom01" type="text">
+                    <div *ngIf="(category?.dirty || category?.touched) && category?.errors" class="errors">
+                        <span *ngIf="category?.errors?.required">Category Name is
+                            required</span>
+                        <span *ngIf="category?.errors?.category">Category Name is invalid</span>
+                    </div>
+                </div>
+
+                <label for="validationCustom02" class="mb-1">Category Image :</label>
+                <div class="card-body dropzone-custom p-0">
+
+                    <div class="container">
+                        <img style="width: '100px'" class="img-thumbnail" *ngIf="catImage" [src]="catImage" alt="">
+                    </div>
+                    <button *ngIf="catImage" (click)="replaceImage()" class="btn btn-del my-4">Replace Image</button>
+
+
+                    <ngx-dropzone [multiple]="false" *ngIf="!catImage" (change)="onSelect($event)">
+                        <div class="dropzone dropzone-primary" style="border: none;">
+                            <div class="dz-message needsclick">
+                                <i class="fa fa-cloud-upload"></i>
+                                <h4 class="mb-0 f-w-600">Drop Image here or click to
+                                    upload.</h4>
+                            </div>
+                        </div>
+                        <ngx-dropzone-preview *ngIf="files" [removable]="true" (removed)="onRemove()">
+                            <ngx-dropzone-label>{{ files?.name }} ({{ files?.type }})</ngx-dropzone-label>
+                        </ngx-dropzone-preview>
+                    </ngx-dropzone>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button [disabled]="!categoryForm.valid" class="btn primary-btn">
+                Save
+                <div *ngIf="loading" class="spinner-grow" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </button>
+            <button class="btn btn-secondary" type="button" data-dismiss="modal"
+                (click)="modal.dismiss('Cross click')">Close</button>
+        </div>
+    </form>
+</ng-template>

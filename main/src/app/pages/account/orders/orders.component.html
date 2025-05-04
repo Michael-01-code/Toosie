@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-header">
+    <h5>My Orders</h5>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Order No</th>
+            <th>Order Date</th>
+            <th>Products</th>
+            <th>Payment Status</th>
+            <th>Payment Method</th>
+            <th>Delivery Status</th>
+            <th>Total Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of combinedOrders">
+            <td>{{ order.id }}</td>
+            <td>{{ order.createdAt }}</td>
+            <td [innerHTML]="order.products"></td>
+            <td>{{ order.paymentStatus }}</td>
+            <td>{{ order.paymentMethod }}</td>
+            <td>{{ order.deliveryStatus }}</td>
+            <td>₦ {{ order.totalCost}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

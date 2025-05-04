@@ -1,0 +1,24 @@
+<owl-carousel-o [options]="BlogSliderConfig" class="no-arrow">
+  <ng-container *ngFor="let blog of blogs">
+    <ng-template carouselSlide>
+      <div class="col-md-12">
+        <a [routerLink]="'../blog/details/' + blog._id">
+          <div style="height: 300px;" class="classic-effect">
+            <img [src]="blog.blogImage" class="img-fluid" alt="blog">
+            <span></span>
+          </div>
+        </a>
+        <div class="blog-details">
+          <h4>{{blog.createdAt | date}}</h4>
+          <a [routerLink]="'../blog/details/' + blog._id">
+            <p>{{blog.blogTitle}}</p>
+          </a>
+          <hr class="style1">
+          <h6  *ngIf="blog?.blogAuthor?.email">Posted By : {{blog?.blogAuthor?.fullName}} </h6>
+          <h6  *ngIf="!blog?.blogAuthor?.email">Posted By : Anonymous </h6>
+         
+        </div>
+      </div>
+    </ng-template>
+  </ng-container>
+</owl-carousel-o>

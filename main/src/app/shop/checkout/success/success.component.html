@@ -1,0 +1,80 @@
+<!-- order-detail section start -->
+<section class="section-b-space" *ngIf="orderDetails">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="product-order">
+                    <h3>your order details</h3>
+                    <div class="row product-order-detail" *ngFor="let product of orderDetails.products; let i =index">
+                        <div class="col-3">
+                            <img [src]="product.resourceImages[0]" alt="" class="img-fluid">
+                        </div>
+                        <div class="col-3 order_detail">
+                            <div>
+                                <h4>product name</h4>
+                                <h5>{{ product.title | slice: 0:20 }}</h5>
+                            </div>
+                        </div>
+                        <div class="col-3 order_detail">
+                            <div>
+                                <h4>quantity</h4>
+                                <h5>{{ orderDetails.orderDetails[i].quantity }}</h5>
+                            </div>
+                        </div>
+                        <div class="col-3 order_detail">
+                            <div>
+                                <h4>price</h4>
+                                <h5>₦{{ product?.actualPrice * orderDetails.orderDetails[i].quantity - (product?.actualPrice * (product.discountPercent/100) * orderDetails.orderDetails[i].quantity) }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="total-sec">
+                        <ul>
+                            <li>Subtotal <span>{{ orderDetails.totalAmount | currency:productService?.Currency.currency:'symbol' }}</span></li>
+                            <!-- <li>Delivery Cost <span> {{ orderDetails?.shipping?.addressDeliveryCost | currency:productService?.Currency.currency:'symbol' }}</span></li> -->
+                            
+                        </ul>
+                    </div>
+                    <div class="final-total">
+                        <h3>total <span>{{ orderDetails?.totalCost | currency:productService?.Currency.currency:'symbol' }}</span></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="row order-success-sec">
+                    <div class="col-sm-6">
+                        <h4>summery</h4>
+                        <ul class="order-detail">
+                            <li>order ID: {{ orderDetails._id }}</li>
+                            <li>Order Date: {{orderDetails.createdAt | date}}</li>
+                            <li>Order Total: {{ orderDetails.totalCost | currency:productService?.Currency.currency:'symbol' }}</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6">
+                        <h4>shipping address</h4>
+                        <ul class="order-detail">
+                            <li>{{ orderDetails?.shipping?.address }}</li>
+                            <li>{{ orderDetails?.shipping?.state }}</li>
+                            <li>{{ orderDetails?.shipping?.city }}, {{ orderDetails?.shipping?.postalcode }}</li>
+                            <li>Contact No. {{ orderDetails?.shipping?.phone }}</li>
+                        </ul>
+                    </div>
+
+                    <div class="col-sm-12 payment-mode">
+                        <h4>payment method</h4>
+                        <p *ngIf="orderDetails.paymentMethod === 'pod'">Payment on Delivery</p>
+                        <p *ngIf="orderDetails.paymentMethod === 'card'">Card Payment</p>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="delivery-sec">
+                            <h3>expected date of delivery</h3>
+                            <h2>Before {{ deliveryDate | date }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- Section ends -->

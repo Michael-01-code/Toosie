@@ -1,0 +1,22 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+
+                <div class="d-flex flex-row-reverse">
+                    <div class="mb-0 pt-5 mr-5">
+                        <button (click)="exportToXlsx()" class="btn btn-outline-primary">Export Data to Excel</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="batchDelete" class="custom-datatable">
+                        <div class="table-responsive">
+                            <ng2-smart-table [settings]="settings" (deleteConfirm)="onDeleteConfirm($event)"
+                                (custom)="onCustom($event)" [source]="prescriptions"></ng2-smart-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

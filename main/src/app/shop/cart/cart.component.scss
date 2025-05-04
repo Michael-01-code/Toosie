@@ -1,0 +1,20 @@
+.qty-box {
+    width: 30%; /* Reduces the width of the quantity box to half */
+    margin: 0 auto;
+    height: 30%; /* Reduces the height of the quantity box to half */
+}
+.input-group {
+    font-size: 14px; /* Adjust the font size to ensure the content fits */
+    
+}
+.input-group-prepend button {
+    width: 30px; /* Adjust button width */
+    height: 30px; /* Adjust button height */
+    font-size: 18px; /* Adjust button text size */
+    padding: 0;
+}
+.form-control.input-number {
+    width: 40px; /* Reduce width of the input field */
+    text-align: center; /* Align text to center */
+    font-size: 14px; /* Reduce font size of the input text */
+}

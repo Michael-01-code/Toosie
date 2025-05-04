@@ -1,0 +1,57 @@
+<app-breadcrumb [title]="'Blog Details'" [breadcrumb]="'Blog Details'"></app-breadcrumb>
+<!--section start-->
+<section class="blog-detail-page section-b-space">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 blog-detail mb-5">
+                <img style="height: 300px; width: 100%; object-fit: cover;" [src]="blog.blogImage" class="img-fluid" alt=""/>
+                <h3>{{blog.blogTitle}}</h3>
+                <ul class="post-social">
+                    <li>{{blog.createdAt | date}} </li>
+                    <li *ngIf="blog?.blogAuthor">Posted By : {{blog.blogAuthor.fullName}} </li>
+                    <li *ngIf="!blog?.blogAuthor">Posted By : Anonymous </li>
+
+                </ul>
+                <p [innerHTML]="blog.blogContent">{{blog.blogContent}}</p>
+                </div>
+        </div>
+        <hr>
+        <div *ngFor="let blog of relatedBlogs" class="row section-b-space blog-advance">
+            <div class="col-12"><h3>Related Blogs</h3></div>
+            <div  class="col-lg-6">
+                <img style="height: 200px;" [src]="blog.blogImage" class="img-fluid" alt=""/>
+                <div class="row">
+                    <div class="col-12">
+                        <p [innerHTML]="blog.blogContent | slice: 0:200"></p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <!-- <div class="row blog-contact">
+            <div class="col-sm-12">
+                <h2>Leave Your Comment</h2>
+                <form class="theme-form">
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Enter Your name" required="">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="email">Email</label>
+                            <input type="text" class="form-control" id="email" placeholder="Email" required="">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="exampleFormControlTextarea1">Comment</label>
+                            <textarea class="form-control" placeholder="Write Your Comment" id="exampleFormControlTextarea1" rows="6"></textarea>
+                        </div>
+                        <div class="col-md-12">
+                            <button class="btn btn-solid" type="submit">Post Comment</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div> -->
+    </div>
+</section>
+<!--Section ends-->

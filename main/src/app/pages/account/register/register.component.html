@@ -1,0 +1,58 @@
+<app-breadcrumb [title]="'Register'" [breadcrumb]="'Register'"></app-breadcrumb>
+<!-- section start -->
+<section class="register-page section-b-space">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>create account</h3>
+                <div class="theme-card">
+                    <form (ngSubmit)="login()" [formGroup]="credentials" class="theme-form">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="email">Fullname*</label>
+                                <input type="text" class="form-control" id="fname" placeholder="Full Name" formControlName="fullName">
+                                <div *ngIf="(fullName?.dirty || fullName?.touched) && fullName?.errors" class="errors">
+                                    <span *ngIf="fullName?.errors?.required">Full Name is required</span>
+                                    
+                                  </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="review">Phone*</label>
+                                <input type="text" class="form-control" id="lname" placeholder="Phone Number" formControlName="phone">
+                                <div *ngIf="(phone?.dirty || phone?.touched) && phone?.errors" class="errors">
+                                    <span *ngIf="phone?.errors?.required">Phone is required</span>
+                                  
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="email">email*</label>
+                                <input type="text" class="form-control" id="email" placeholder="Email" formControlName="email">
+                                <div *ngIf="(email?.dirty || email?.touched) && email?.errors" class="errors">
+                                    <span *ngIf="email?.errors?.required">Email is required</span>
+                                    <span *ngIf="email?.errors?.email">Email is invalid</span>
+                                  </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="review">Password*</label>
+                                <input type="password" class="form-control" id="review" placeholder="Enter your password" formControlName="password">
+                                <div *ngIf="(password?.dirty || password?.touched) && password?.errors" class="errors">
+                                    <span *ngIf="password?.errors?.required">Password is required</span>
+                                  </div>
+                            </div>
+                            <button [disabled]="!credentials.valid" type="submit" class="btn btn-solid">create Account
+                                <div *ngIf="loading" class="spinner-grow" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                  </div>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-verify-user #verifyUser></app-verify-user>
+<!--Section ends-->

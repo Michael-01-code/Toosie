@@ -1,0 +1,322 @@
+
+
+
+h2 {
+  font-size: 36px;
+  color: #222222;
+  text-transform: uppercase;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+
+
+h4 {
+  font-size: 18px;
+  text-transform: capitalize;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1;
+}
+
+
+
+
+
+ul {
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+li {
+  display: inline-block;
+}
+
+p {
+  font-size: 14px;
+  color: #777777;
+  line-height: 1;
+}
+
+a {
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+a:focus {
+  outline: none;
+}
+
+button:focus {
+  outline: none;
+}
+
+.btn-close:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+label {
+  margin-bottom: 0.5rem;
+}
+
+:focus {
+  outline: none;
+}
+
+.form-control:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.text-theme {
+  color: var(--theme-deafult) !important;
+}
+
+.btn {
+  line-height: 20px;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 0;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+
+.invoice-wrapper {
+  position: relative;
+}
+.invoice-wrapper h2 {
+  font-size: 30px;
+}
+.invoice-wrapper h4 {
+  color: #646464;
+}
+.invoice-wrapper .invoice-detail h5 {
+  text-transform: uppercase;
+  margin-bottom: 0;
+  font-weight: 600;
+}
+.invoice-wrapper .invoice-detail h6 {
+  margin-bottom: 0;
+  font-size: 16px;
+  color: #6d6d6d;
+}
+
+.invoice-wrapper .invoice-body .table th,
+.invoice-wrapper .invoice-body .table td {
+  border-top: none;
+}
+.invoice-wrapper .invoice-body .table {
+  font-size: 16px;
+}
+.invoice-wrapper .invoice-body .table thead th {
+  text-transform: uppercase;
+  font-weight: 400;
+  padding-bottom: 16px;
+  color: black;
+  border-color: var(--theme-deafult) !important;
+}
+.invoice-wrapper .invoice-body .table td {
+  color: #646464;
+}
+.invoice-wrapper .invoice-body .table tbody td,
+.invoice-wrapper .invoice-body .table tbody th {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-transform: capitalize;
+}
+.invoice-wrapper .invoice-body .table tbody th {
+  font-weight: normal;
+  color: #646464;
+}
+.invoice-wrapper .invoice-body .table tbody tr:first-child td,
+.invoice-wrapper .invoice-body .table tbody tr:first-child th {
+  padding-top: 22px;
+}
+.invoice-wrapper .invoice-body .table tbody tr:last-child td,
+.invoice-wrapper .invoice-body .table tbody tr:last-child th {
+  padding-bottom: 22px;
+}
+.invoice-wrapper .invoice-body .table tfoot {
+  border-top: 1px solid #ddd;
+}
+.invoice-wrapper .invoice-body .table tfoot td {
+  padding-top: 15px;
+}
+
+.invoice-wrapper .font-bold {
+  font-weight: bold;
+}
+
+
+
+
+
+
+.theme-invoice-4 .table-striped > tbody > tr:nth-of-type(even) {
+  --bs-table-accent-bg: var(--bs-table-striped-bg);
+  color: var(--bs-table-striped-color);
+}
+
+.theme-invoice-4 .table-striped > tbody > tr:nth-of-type(odd) {
+  --bs-table-accent-bg: white;
+  color: #646464;
+}
+
+.theme-invoice-4 .invoice-wrapper .invoice-body {
+  padding: 0;
+  z-index: 1;
+  position: relative;
+}
+.theme-invoice-4 .invoice-wrapper .invoice-body .table thead {
+  background-color: black;
+}
+.theme-invoice-4 .invoice-wrapper .invoice-body .table thead th {
+  border-bottom: 0 !important;
+  padding: 18px;
+  color: white;
+}
+.theme-invoice-4 .invoice-wrapper .invoice-body .table tbody th,
+.theme-invoice-4 .invoice-wrapper .invoice-body .table tbody td {
+  padding: 18px 18px !important;
+  font-size: 18px;
+}
+.theme-invoice-4 .invoice-wrapper .invoice-body .table tfoot {
+  border-top: 0;
+}
+
+
+
+
+
+
+.theme-invoice-4 .top-sec {
+  padding: 0 calc(15px + (65 - 15) * ((100vw - 320px) / (1920 - 320)))
+    calc(15px + (45 - 15) * ((100vw - 320px) / (1920 - 320)));
+}
+
+.theme-invoice-4 .title-sec {
+  padding: calc(15px + (30 - 15) * ((100vw - 320px) / (1920 - 320)))
+    calc(15px + (65 - 15) * ((100vw - 320px) / (1920 - 320)));
+  background-color: #f8f8f8;
+  border-top: 1px solid #ececec;
+  border-bottom: 1px solid #ececec;
+  position: relative;
+}
+.theme-invoice-4 .title-sec .title {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.theme-invoice-4 .table-sec {
+  padding: calc(15px + (40 - 15) * ((100vw - 320px) / (1920 - 320)))
+    calc(15px + (65 - 15) * ((100vw - 320px) / (1920 - 320)));
+}
+.theme-invoice-4 .table-sec .table-footer {
+  background-color: var(--theme-deafult);
+  display: inline-block;
+  padding: calc(10px + (15 - 10) * ((100vw - 320px) / (1920 - 320)))
+    calc(15px + (30 - 15) * ((100vw - 320px) / (1920 - 320)));
+  font-size: calc(14px + (20 - 14) * ((100vw - 320px) / (1920 - 320)));
+  color: white;
+  margin-top: 30px;
+}
+
+.theme-invoice-4 .date-detail li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.theme-invoice-4 .date-detail li span {
+  font-size: 18px;
+  text-transform: capitalize;
+  color: var(--theme-deafult);
+  margin-right: 8px;
+}
+.theme-invoice-4 .date-detail li h4 {
+  margin-bottom: 0;
+}
+
+@media (max-width: 991px) {
+  h4 {
+    font-size: 16px;
+  }
+  .theme-invoice-4 .invoice-wrapper .invoice-footer ul li i {
+    margin-right: 10px;
+  }
+}
+
+@media (max-width: 767px) {
+  .theme-invoice-4 .title-sec .title {
+    position: relative;
+    text-align: center;
+    margin-top: 20px;
+  }
+  .theme-invoice-4 .invoice-wrapper .invoice-footer ul {
+    display: block;
+    margin-bottom: -20px;
+  }
+  .theme-invoice-4 .invoice-wrapper .invoice-footer ul li {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 577px) {
+  .invoice-wrapper h2 {
+    font-size: 20px;
+  }
+  .invoice-wrapper .btn-solid,
+  .invoice-wrapper .btn-outline {
+    padding: 6px 13px;
+    font-size: 12px;
+  }
+  .invoice-wrapper .authorise-sign {
+    width: 30%;
+  }
+  .invoice-wrapper .invoice-body .table tbody td:nth-child(2),
+  .invoice-wrapper .invoice-body .table tbody th:nth-child(2) {
+    min-width: 240px;
+  }
+  .theme-invoice-2 .invoice-body .date-detail {
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+  }
+  .theme-invoice-2 .invoice-body .date-detail li {
+    width: 100%;
+  }
+  .theme-invoice-4 .invoice-header .background-invoice {
+    left: 40px;
+  }
+}
+
+@media (max-width: 420px) {
+  .invoice-wrapper .authorise-sign {
+    width: 20%;
+  }
+  .invoice-wrapper .btn-solid,
+  .invoice-wrapper .btn-outline {
+    padding: 4px 8px;
+  }
+}
+.flex-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.view-btn{
+  font-weight: normal;
+  text-transform: capitalize;
+}
