@@ -174,31 +174,36 @@ export class ProductService {
     return false;
   }
 
-  public updateCartQuantity(product: Product, quantity: number): Product | boolean {
-    return state.cart.find((item, index) => {
-      if (item._id === product._id) {
-        const currentQuantity = state.cart[index].quantity;
-        const newQuantity = currentQuantity + quantity;
-        const stock = this.calculateStockCounts(state.cart[index], quantity);
+    public updateCartQuantity(product: Product, quantityToAdd: number): Product | boolean {
+  const index = state.cart.findIndex(item => item._id === product._id);
 
-        if (newQuantity > 0 && stock) {
-          state.cart[index].quantity = newQuantity;
-          localStorage.setItem("cartItems", JSON.stringify(state.cart));
-          return true;
-        }
-      }
-    });
-  }
+  if (index !== -1) {
+    const currentItem = state.cart[index];
+    const newQuantity = currentItem.quantity + quantityToAdd;
 
-  public calculateStockCounts(product, quantity) {
-    const qty = product.quantity + quantity;
-    const stock = product.stock;
-    if (stock < qty || stock == 0) {
-      this.toastrService.error(`Currently low on stock. Only ${stock} item(s) in stock.`);
+    if (newQuantity <= 0) {
+      return false; // Cannot reduce quantity below 1
+    }
+
+    if (this.calculateStockCounts(product, newQuantity)) {
+      currentItem.quantity = newQuantity;
+      localStorage.setItem("cartItems", JSON.stringify(state.cart));
+      return currentItem;
+    } else {
       return false;
     }
-    return true;
   }
+
+  return false; // Product not found in cart
+}
+
+private calculateStockCounts(product: Product, desiredQuantity: number): boolean {
+  if (product.stock < desiredQuantity || product.stock === 0) {
+    this.toastrService.error(`Currently low on stock. Only ${product.stock} item(s) in stock.`);
+    return false;
+  }
+  return true;
+}
 
   public removeCartItem(product: Product): any {
     const index = state.cart.findIndex(item => item._id === product._id);
