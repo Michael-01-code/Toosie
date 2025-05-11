@@ -148,57 +148,69 @@ export class ProductService {
     });
   }
 
-  public addToCart(product): any {
-    if (product.stock > 0) {
-      const cartItem = state.cart.find(item => item._id === product._id);
-      const qty = product.quantity ? product.quantity : 1;
-      const items = cartItem ? cartItem : product;
-      const stock = this.calculateStockCounts(items, qty);
+  public addToCart(product): boolean {
+  if (product.stock > 0) {
+    const cartItem = state.cart.find(item => item._id === product._id);
+    const qtyToAdd = product.quantity ?? 1;
+    const currentQtyInCart = cartItem?.quantity ?? 0;
 
-      if (!stock) return false;
+    const canAdd = this.calculateStockCounts(product, currentQtyInCart, qtyToAdd);
+    if (!canAdd) return false;
 
-      if (cartItem) {
-        cartItem.quantity += qty;
-      } else {
-        state.cart.push({
-          ...product,
-          quantity: qty
-        });
-      }
-
-      this.OpenCart = true;
-      localStorage.setItem("cartItems", JSON.stringify(state.cart));
-      return true;
+    if (cartItem) {
+      cartItem.quantity += qtyToAdd;
+    } else {
+      state.cart.push({
+        ...product,
+        quantity: qtyToAdd
+      });
     }
-    this.toastrService.error('Product is out of stock!');
-    return false;
-  }
 
-  public updateCartQuantity(product: Product, quantity: number): Product | boolean {
-    return state.cart.find((item, index) => {
-      if (item._id === product._id) {
-        const currentQuantity = state.cart[index].quantity;
-        const newQuantity = currentQuantity + quantity;
-        const stock = this.calculateStockCounts(state.cart[index], quantity);
-
-        if (newQuantity > 0 && stock) {
-          state.cart[index].quantity = newQuantity;
-          localStorage.setItem("cartItems", JSON.stringify(state.cart));
-          return true;
-        }
-      }
-    });
-  }
-
-  public calculateStockCounts(product, quantity) {
-    const qty = product.quantity + quantity;
-    const stock = product.stock;
-    if (stock < qty || stock == 0) {
-      this.toastrService.error(`Currently low on stock. Only ${stock} item(s) in stock.`);
-      return false;
-    }
+    this.OpenCart = true;
+    localStorage.setItem("cartItems", JSON.stringify(state.cart));
     return true;
   }
+
+  this.toastrService.error('Product is out of stock!');
+  return false;
+}
+
+
+  public updateCartQuantity(product, changeInQty: number): boolean {
+  const index = state.cart.findIndex(item => item._id === product._id);
+
+  if (index > -1) {
+    const cartItem = state.cart[index];
+    const newQty = cartItem.quantity + changeInQty;
+
+    if (newQty <= 0) {
+      this.removeCartItem(product);
+      return true;
+    }
+
+    const canUpdate = this.calculateStockCounts(product, cartItem.quantity, changeInQty);
+    if (!canUpdate) return false;
+
+    cartItem.quantity = newQty;
+    localStorage.setItem("cartItems", JSON.stringify(state.cart));
+    return true;
+  }
+
+  return false;
+}
+
+
+  public calculateStockCounts(product, currentQty: number, addedQty: number): boolean {
+  const totalQty = currentQty + addedQty;
+  const stock = product.stock;
+
+  if (stock < totalQty || stock === 0) {
+    this.toastrService.error(`Currently low on stock. Only ${stock} item(s) in stock.`);
+    return false;
+  }
+  return true;
+}
+
 
   public removeCartItem(product: Product): any {
     const index = state.cart.findIndex(item => item._id === product._id);
