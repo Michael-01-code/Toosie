@@ -40,23 +40,30 @@ export class VerifyUserComponent implements OnInit {
   }
 
 
-  submit(){
-    this.loading=true;
-    console.log(this.credentials.value);
-    this.authS.verifyUser(this.unvuser._id, this.credentials.value).subscribe(
-      async (res) => {
-        this.loading = false
-        this.router.navigate(['/']);
-        this.modalService.dismissAll()
-        this.credentials.reset({email: '', otp: ''})
-      },
-      async (res) => {
-        this.loading = false
-        console.log(res);
-        alert('signup failed')
+  submit() {
+  this.loading = true;
+  console.log(this.credentials.value);
+
+  this.authS.verifyUser(this.unvuser._id, this.credentials.value).subscribe(
+    (res) => {
+      this.loading = false;
+      this.router.navigate(['/']);
+      this.modalService.dismissAll();
+      this.credentials.reset({ email: '', otp: '' });
+    },
+    (error) => {
+      this.loading = false;
+      console.log('Verification error:', error);
+
+      // Customize the error message based on server response
+      if (error?.error?.message === 'Invalid OTP'||error.status === 401) {
+        alert('Wrong OTP, try again.');
+      } else {
+        alert('Signup failed. Please try again.');
       }
-    );
-  }
+    }
+  );
+}
 
   openModal() {
     if (isPlatformBrowser(this.platformId)) { // For SSR 
