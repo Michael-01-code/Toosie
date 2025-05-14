@@ -198,7 +198,7 @@ export class CheckoutComponent implements OnInit {
     return this.checkoutForm.get('paymentMethod');
   }
 
-  async payWithPaystack() {
+  payWithPaystack() {
     var handler = PaystackPop.setup({
       key: 'pk_live_8fa45918feaa0925713ae746c8ae810b67462b3a', // Replace with your public key
       email: this.user.email,
