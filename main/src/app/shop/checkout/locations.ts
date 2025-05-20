@@ -4,11 +4,11 @@ export const locationList = [
     state: 'Abuja',
     value: 1000,
   },
-  {
+  /* {
     label: 'Apo District',
     state: 'Abuja',
     value: 1500,
-  },
+  }, */
   {
     label: 'Central Business District',
     state: 'Abuja',
