@@ -53,19 +53,22 @@ export class AdminBlogList implements OnInit {
 
 
   ngOnInit() {
-    this.service.blogStore.subscribe(e =>{
-      this.blogs = e.map(blog =>{
-        return {
-          ...blog,
-          blogAuthor: blog?.blogAuthor?.fullName,
-          blogContent: blog.blogContent.slice(0,50) + '...',
-          blogImage: `<img src=${blog?.blogImage} class='imgTable'>`,
-            edit: `
-           <a href=dashboard/main/blog/edit-blog/${blog._id} class="ng2-smart-action ng2-smart-action-edit-edit ng-star-inserted"><a/>`
-        }
-      })
-    })
-  }
+  this.service.blogStore.subscribe(e => {
+    // Sort by createdAt in descending order (newest first)
+    const sorted = e.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+
+    this.blogs = sorted.map(blog => {
+      return {
+        ...blog,
+        blogAuthor: blog?.blogAuthor?.fullName,
+        blogContent: blog.blogContent.slice(0, 50) + '...',
+        blogImage: `<img src=${blog?.blogImage} class='imgTable'>`,
+        edit: `
+          <a href=dashboard/main/blog/edit-blog/${blog._id} class="ng2-smart-action ng2-smart-action-edit-edit ng-star-inserted"><a/>`
+      }
+    });
+  });
+}
   onDeleteConfirm(event) {
     console.log("Delete Event In Console")
     console.log(event);
