@@ -13,8 +13,11 @@ export class BlogComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-  console.log(this.blogs)
-  }
+  // Sort blogs by createdAt date in descending order (newest first)
+  this.blogs.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+
+  console.log(this.blogs);
+}
 
   public BlogSliderConfig: any = BlogSlider;
 
